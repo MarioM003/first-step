@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class playercontroller : MonoBehaviour
 {
-    public float velocidad;
+    
     public float FuerzaSalto = 10f;
-    public Transform puntoSuelo;
-    public float radioSuelo = 0.2f;
+    public Transform Checker;
+    public float RadioDeChecker = 0.2f;
     public LayerMask mascaraSuelo;
     public bool enSuelo;
     private Rigidbody2D rigidBody;
@@ -15,7 +15,7 @@ public class playercontroller : MonoBehaviour
     void Start()
     {
         rigidBody= GetComponent<Rigidbody2D>();
-        puntoSuelo = transform.Find("PuntoSuelo");
+        
     }
 
     void Update()
@@ -23,23 +23,28 @@ public class playercontroller : MonoBehaviour
         
         if (Input.GetKey("left"))
         {
-            gameObject.transform.Translate(-02f * Time.deltaTime, 0, 0);
+            gameObject.transform.Translate(-08f * Time.deltaTime, 0, 0);
             
         }
         if (Input.GetKey("right"))
         {
-            gameObject.transform.Translate(02f * Time.deltaTime, 0, 0);
+            gameObject.transform.Translate(08f * Time.deltaTime, 0, 0);
             
-        }
-        enSuelo = Physics2D.OverlapCircle(puntoSuelo.position,radioSuelo,mascaraSuelo);
-        if(enSuelo == true && Input.GetKeyDown(KeyCode.Space)){ 
+        } 
+
+        enSuelo =Physics2D.OverlapCircle(Checker.position,RadioDeChecker,mascaraSuelo);
+
+        if(enSuelo==true && Input.GetKeyDown(KeyCode.Space)){
             ManageJump();
         }
         
     }
-
+    void checkGrounded()
+    {       
+            
+    }
     void ManageJump()
-    {
+    {       
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0f);
             rigidBody.AddForce(Vector2.up * FuerzaSalto,ForceMode2D.Impulse);
     }
