@@ -23,12 +23,12 @@ public class playercontroller : MonoBehaviour
         
         if (Input.GetKey("left"))
         {
-            gameObject.transform.Translate(-08f * Time.deltaTime, 0, 0);
+            gameObject.transform.Translate(-5f * Time.deltaTime, 0, 0);
             
         }
         if (Input.GetKey("right"))
         {
-            gameObject.transform.Translate(08f * Time.deltaTime, 0, 0);
+            gameObject.transform.Translate(5f * Time.deltaTime, 0, 0);
             
         } 
 
