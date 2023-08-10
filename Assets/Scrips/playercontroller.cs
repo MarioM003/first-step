@@ -7,10 +7,13 @@ public class playercontroller : MonoBehaviour
     
     public float FuerzaSalto = 10f;
     public Transform Checker;
+    public float TiempoEntreSaltos = 1f; // Tiempo en segundos entre saltos
+    private float tiempoDesdeUltimoSalto = 0f;
     public float RadioDeChecker = 0.2f;
     public LayerMask mascaraSuelo;
     public bool enSuelo;
     private Rigidbody2D rigidBody;
+    public float velocidad;
     
     void Start()
     {
@@ -23,18 +26,18 @@ public class playercontroller : MonoBehaviour
         
         if (Input.GetKey("left"))
         {
-            gameObject.transform.Translate(-5f * Time.deltaTime, 0, 0);
+            gameObject.transform.Translate(-velocidad * Time.deltaTime, 0, 0);
             
         }
         if (Input.GetKey("right"))
         {
-            gameObject.transform.Translate(5f * Time.deltaTime, 0, 0);
+            gameObject.transform.Translate(velocidad * Time.deltaTime, 0, 0);
             
         } 
 
         enSuelo =Physics2D.OverlapCircle(Checker.position,RadioDeChecker,mascaraSuelo);
 
-        if(enSuelo==true && Input.GetKeyDown(KeyCode.Space)){
+        if(enSuelo==true && Input.GetKeyDown(KeyCode.Space) && Time.time - tiempoDesdeUltimoSalto >= TiempoEntreSaltos){
             ManageJump();
         }
         
@@ -47,6 +50,7 @@ public class playercontroller : MonoBehaviour
     {       
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0f);
             rigidBody.AddForce(Vector2.up * FuerzaSalto,ForceMode2D.Impulse);
+            tiempoDesdeUltimoSalto = Time.time;
     }
     
 }
