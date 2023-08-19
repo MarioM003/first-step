@@ -42,3 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: suelo
+    uniqueID: 4272016479
+    locked: 0
+  - name: pared
+    uniqueID: 963494769
+    locked: 0
